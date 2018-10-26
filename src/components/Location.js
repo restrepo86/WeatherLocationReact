@@ -1,5 +1,5 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 //Destructuring => Cuando tenenmos una propiedad que luego queremos asignar a una variable o constante
 //con el mismo nombre de la propiedad utilizamos esa técnica
 
@@ -12,6 +12,10 @@ const Location = ({ city }) => (
       </div>
 
 );
+
+Location.propTypes = {
+  city: PropTypes.string.isRequired,
+};
 
 export default Location;
 
@@ -70,5 +74,5 @@ export default Location;
     para extraer los elementos remanentes, que los elementos
     que queden, despues de tomar los primeros identificados.
 
-    
+
 **/
