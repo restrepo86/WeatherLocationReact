@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './styles.css';
 //Destructuring => Cuando tenenmos una propiedad que luego queremos asignar a una variable o constante
 //con el mismo nombre de la propiedad utilizamos esa técnica
 
 const Location = ({ city }) => (
 
-      <div>
+      <div className="locationCont">
         <h1>
           { city }
         </h1>
