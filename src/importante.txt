@@ -14,7 +14,7 @@
 
   Lo podemos refactorizar así ya que los valores de las constantes y las propiedades
   de la otra tienen el mismo nombre, pero siempre deben estar declaradas todas las
-  que necesita las constantes para el refactor si no saca error -->> 
+  que necesita las constantes para el refactor si no saca error -->>
 
       const txt1 = "hola;
       const txt2 = " mundo";
@@ -23,5 +23,12 @@
         txt1,
         txt2
       };
+
+
+
+PRINCIPIOS SOLID --->>>
+
+  S -> Single Responsability -->> cada cosa debe tener una sola responsabilidad para que tenga legibilidad
+        y bajo acoplamiento
 
 **/
