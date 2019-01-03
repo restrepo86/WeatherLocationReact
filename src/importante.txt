@@ -1,0 +1,27 @@
+/**
+  Existe una manera de simplificar código en EcmaScript que se llama
+  "object literal property value shorthand" y se hace de la siguiente manera
+
+  Tenemos el siguiente código -->>
+
+      const txt1 = "hola;
+      const txt2 = " mundo";
+
+      const res = {
+        txt1: txt1,
+        txt2: txt2
+      };
+
+  Lo podemos refactorizar así ya que los valores de las constantes y las propiedades
+  de la otra tienen el mismo nombre, pero siempre deben estar declaradas todas las
+  que necesita las constantes para el refactor si no saca error -->> 
+
+      const txt1 = "hola;
+      const txt2 = " mundo";
+
+      const res = {
+        txt1,
+        txt2
+      };
+
+**/

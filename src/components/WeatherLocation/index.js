@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import convert from 'convert-units';
 import Location from './Location';
 import WeatherData from './WeatherData';
 import './styles.css';
@@ -34,6 +35,9 @@ class WeatherLocation extends Component {
     };
   }
 
+  getTemp = kelvin => {
+    return Number(convert(kelvin).from("K").to("C").toFixed(2));
+  }
   getWeatherState = weather_data => {
     return SUN;
   }
@@ -42,10 +46,11 @@ class WeatherLocation extends Component {
     const { humidity, temp } = weather_data.main;
     const { speed } = weather_data.wind;
     const weatherState = this.getWeatherState(weather_data);
+    const temperature = this.getTemp(temp);
 
     const data = {
       humidity,
-      temperature: temp,
+      temperature,
       weatherState,
       wind: `${speed} m/s`,
     }
@@ -63,13 +68,6 @@ class WeatherLocation extends Component {
     tiene el resultado que nosotros esperamos .
     **/
 
-    /**
-      Promise -> Es un objeto utilizado para peticiones asincronas
-      y que puede ser utilizado "ahora", "en un futuro" ó "nunca"
-      las promesas tiene tres estados posibles que son pendiente,
-      cumplida o rechazada
-    **/
-
     fetch(api_weather).then( resolve => {
       console.log(resolve);
 
@@ -77,7 +75,7 @@ class WeatherLocation extends Component {
     }).then( data => {
       const newWeather = this.getData(data);
       console.log(newWeather);
-      debugger;
+
       this.setState({
         data: newWeather
       });
@@ -85,6 +83,14 @@ class WeatherLocation extends Component {
     });
 
   }
+
+
+      /**
+        Promise -> Es un objeto utilizado para peticiones asincronas
+        y que puede ser utilizado "ahora", "en un futuro" ó "nunca"
+        las promesas tiene tres estados posibles que son pendiente,
+        cumplida o rechazada
+      **/
 
   render() {
     const { city, data } = this.state;
