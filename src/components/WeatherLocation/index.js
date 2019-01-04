@@ -4,16 +4,7 @@ import { api_weather } from './../../constants/api_url';
 import Location from './Location';
 import WeatherData from './WeatherData';
 import './styles.css';
-import {
-  SUN
-} from './../../constants/Weathers';
 
-const data = {
-  temperature: 10,
-  weatherState: SUN,
-  humidity: 15,
-  wind: '10 m/s',
-}
 
 class WeatherLocation extends Component {
 
@@ -22,12 +13,23 @@ class WeatherLocation extends Component {
     en el resto del componente solo se puede utilizar this.setState para modificar ese estado
   **/
 
+
   constructor() {
     super();
     this.state = {
       city: 'Medellín',
-      data: data,
+      data: null,
     };
+    console.log("constructor");
+  }
+
+  componentDidMount() {
+    console.log("componentDidMount");
+    this.handleUpdateClick();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log("componentDidUpdate");
   }
 
   handleUpdateClick = () => {
@@ -41,10 +43,9 @@ class WeatherLocation extends Component {
     **/
 
     fetch(api_weather).then( resolve => {
-      console.log(resolve);
-
       return resolve.json();
     }).then( data => {
+      console.log("resultado del hundleUpdateClick");
       const newWeather = transformWeather(data);
       console.log(newWeather);
 
@@ -55,8 +56,6 @@ class WeatherLocation extends Component {
     });
 
   }
-
-
       /**
         Promise -> Es un objeto utilizado para peticiones asincronas
         y que puede ser utilizado "ahora", "en un futuro" ó "nunca"
@@ -65,12 +64,15 @@ class WeatherLocation extends Component {
       **/
 
   render() {
+    console.log("render");
     const { city, data } = this.state;
     return (
       <div className="WeatherLocationCont">
         <Location city = {city}/>
-        <WeatherData data = {data}></WeatherData>
-        <button onClick={this.handleUpdateClick}>Actualizar</button>
+        { data ?
+          <WeatherData data = {data}></WeatherData> :
+          "Cargando ..."
+        }
       </div>
     );
   }
